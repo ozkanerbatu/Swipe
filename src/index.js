@@ -9,37 +9,25 @@ import {
 } from "react-native";
 import React, { useEffect, useRef, useState } from "react";
 
-import { AntDesign, Entypo, Ionicons } from "@expo/vector-icons";
+import { AntDesign, Entypo } from "@expo/vector-icons";
 import Swiper from "react-native-deck-swiper";
 import UserServices from "./Components/UserServices";
 import Card from "./Components/Card";
 
 
 const Main = () => {
-
-
     const swipeRef = useRef();
-
     const [profiles, setProfiles] = useState([]);
     useEffect(() => {
         UserServices.getUsers().then(res => { setProfiles(res.meta_data) }).catch(err => { console.log(err); });
     }, [])
-
-
-
     const swipeLeft = async (cardIndex) => {
-
     };
     const swipeRight = async (cardIndex) => {
-
     };
-
     return (
         <SafeAreaView
-            style={{
-                backgroundColor: "white",
-                flex: 1,
-            }}
+            style={styles.container}
         >
             <View style={{ flex: 1 }}>
                 <Swiper
@@ -81,24 +69,14 @@ const Main = () => {
                     }}
                     renderCard={(card, id) =>
                         card ? (
-                            <View
-                                style={{
-                                    backgroundColor: "white", width: "100%",
-                                    borderRadius: 10,
-
-                                }}
-                            >
+                            <View style={styles.cardView} >
                                 <Card card={card} />
                             </View>
                         ) : (
-                            <View
-                                style={
-                                    styles.noContentView
-                                }
-                            >
-                                <Text style={{}}>No more Profiles</Text>
+                            <View style={styles.noContentView}>
+                                <Text>No more Profiles</Text>
                                 <Image
-                                    style={[{ height: 100, width: 100 }, { alignSelf: "center" }]}
+                                    style={[{ height: 100, width: 100, alignSelf: "center" }]}
                                     source={{ uri: "https://links.papareact.com/6gb" }}
                                 />
                             </View>
@@ -166,6 +144,15 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
         elevation: 2,
+    },
+    cardView: {
+        backgroundColor: "white",
+        width: "100%",
+        borderRadius: 10,
+    },
+    container: {
+        backgroundColor: "white",
+        flex: 1,
     }
 });
 export default Main;

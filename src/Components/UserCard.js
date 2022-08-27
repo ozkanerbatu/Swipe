@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, Image, Dimensions } from 'react-native'
 import React from 'react'
-const { width, height } = Dimensions.get("screen");
+const { width } = Dimensions.get("screen");
 const UserCard = (props) => {
     return (
         <View style={styles.container} >
@@ -9,20 +9,11 @@ const UserCard = (props) => {
                 source={{ uri: "https://api.mevzu.app" + props.image }}
             />
             <View
-                style={{
-                    width: "100%",
-                    backgroundColor: "white,",
-                    position: "absolute",
-                    bottom: 5,
-
-                    padding: 10,
-                }}
+                style={styles.textView}
             >
-                <View>
-                    <Text style={styles.text}>
-                        {props.name}
-                    </Text>
-                </View>
+                <Text style={styles.text}>
+                    {props.name}
+                </Text>
             </View>
         </View>
     )
@@ -49,6 +40,13 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 20,
         fontWeight: "bold",
-        color:"white",
+        color: "white",
+    },
+    textView: {
+        width: "100%",
+        backgroundColor: "white,",
+        position: "absolute",
+        bottom: 5,
+        padding: 10,
     }
 })
